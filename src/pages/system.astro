@@ -1,0 +1,37 @@
+---
+import Content from "../layouts/Content.astro";
+
+import { execSync } from "node:child_process";
+let sha = "dev";
+try { sha = execSync("git rev-parse --short HEAD").toString().trim(); } catch {}
+const builtAt = new Date().toISOString().split("T")[0];
+---
+
+<Content title="System Info" context="INFO/SYSTEM">
+  <h1>System Information</h1>
+  <pre class="firmware">{`
+FIRMWARE         v6.61 (Custom)
+MODEL            PSP-WEB-2026
+MEMORY STICK     2GB available
+ENGINEER         Tejesh Arujuna
+BUILT WITH       Astro · React · vanilla CSS
+COMMIT           ${sha}
+BUILD DATE       ${builtAt}
+`}</pre>
+
+  <p><a href="/?replay-boot=1">Re-run boot sequence →</a></p>
+</Content>
+
+<style>
+  .firmware {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.7;
+    background: var(--surface-1);
+    border: 1px solid var(--surface-stroke);
+    border-radius: 6px;
+    padding: var(--space-6);
+    overflow-x: auto;
+  }
+</style>
