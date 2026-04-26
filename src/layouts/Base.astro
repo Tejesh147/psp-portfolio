@@ -1,0 +1,49 @@
+---
+import "../styles/base.css";
+import WaveBackground from "../components/chrome/WaveBackground.astro";
+import StatusBar from "../components/chrome/StatusBar.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  waveIntensity?: "lush" | "subdued";
+  backHref?: string;
+  context?: string;
+}
+const {
+  title,
+  description = "Tejesh Arujuna — engineer. Personal portfolio in PSP firmware style.",
+  waveIntensity = "subdued",
+  backHref,
+  context,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <style>
+      @view-transition { navigation: auto; }
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: var(--dur-page);
+        animation-timing-function: var(--ease-psp);
+      }
+    </style>
+  </head>
+  <body>
+    <WaveBackground intensity={waveIntensity} />
+    <StatusBar backHref={backHref} context={context} />
+    <main class="page">
+      <slot />
+    </main>
+    <style>
+      .page { position: relative; z-index: 1; padding-top: 36px; }
+    </style>
+  </body>
+</html>
