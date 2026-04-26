@@ -9,7 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "typecheck": "astro check"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.4",
@@ -21,5 +25,17 @@
     "astro": "^6.1.9",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@playwright/test": "^1.59.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@vitejs/plugin-react": "^5.2.0",
+    "@vitest/ui": "^4.1.5",
+    "axe-playwright": "^2.2.2",
+    "jsdom": "^29.0.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
   }
 }
