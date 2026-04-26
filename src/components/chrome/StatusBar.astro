@@ -1,0 +1,73 @@
+---
+interface Props {
+  /** Path back to the XMB. If undefined, left side shows the brand. */
+  backHref?: string;
+  /** Right-side context label, e.g. "PRJ://001" */
+  context?: string;
+}
+const { backHref, context } = Astro.props;
+
+const now = new Date();
+const time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+---
+
+<header class="status-bar" role="banner">
+  <div class="status-left">
+    {backHref ? <a href={backHref} class="back-link">← BACK TO XMB</a> : <span class="brand">PSP-WEB</span>}
+  </div>
+  <div class="status-right">
+    {context && <span class="ctx" aria-hidden="true">{context}</span>}
+    <span class="clock" aria-hidden="true">{time}</span>
+    <span class="battery" aria-hidden="true">
+      <span class="battery-icon"><span class="battery-fill"></span></span>
+      <span class="battery-pct">80%</span>
+    </span>
+  </div>
+</header>
+
+<style>
+  .status-bar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 36px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-6);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.5px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0));
+  }
+  .status-left, .status-right { display: flex; align-items: center; gap: var(--space-4); }
+  .back-link { color: var(--ink-muted); }
+  .back-link:hover { color: var(--ink); text-decoration: none; }
+  .brand { letter-spacing: 2px; }
+  .ctx { letter-spacing: 1.5px; }
+  .battery { display: flex; align-items: center; gap: var(--space-1); }
+  .battery-icon {
+    width: 22px; height: 11px;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    border-radius: 2px;
+    position: relative;
+    padding: 1.5px;
+    display: flex; align-items: center;
+  }
+  .battery-icon::after {
+    content: "";
+    position: absolute;
+    right: -4px;
+    width: 2px; height: 5px;
+    background: rgba(255,255,255,0.45);
+    border-radius: 0 1px 1px 0;
+  }
+  .battery-fill {
+    width: 80%;
+    height: 100%;
+    background: var(--battery);
+    border-radius: 1px;
+  }
+  .battery-pct { font-size: 10px; }
+</style>
