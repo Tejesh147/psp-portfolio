@@ -1,7 +1,8 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const projects = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -30,11 +31,11 @@ const projects = defineCollection({
 });
 
 const personal = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/personal" }),
   schema: z.object({
     title: z.string(),
     order: z.number().int(),
-    icon: z.string(), // lucide icon name, used by XMB sub-items
+    icon: z.string(),
   }),
 });
 
