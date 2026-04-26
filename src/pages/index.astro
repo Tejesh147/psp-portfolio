@@ -1,6 +1,43 @@
 ---
 import Base from "../layouts/Base.astro";
+import XmbShell from "../components/xmb/XmbShell";
+import { buildXmbCategories } from "../lib/xmbData";
+
+const categories = await buildXmbCategories();
 ---
-<Base title="PSP Portfolio" waveIntensity="lush">
-  <p style="padding: 4rem;">XMB lands here in Phase 5.</p>
+
+<Base title="Tejesh Arujuna — PSP Portfolio" waveIntensity="lush">
+  <XmbShell client:load categories={categories} initialCategoryId="projects" />
+
+  <noscript>
+    <ul class="no-js-fallback">
+      {categories.map((cat) => (
+        <li>
+          <h2>{cat.label}</h2>
+          <ul>
+            {cat.items.map((item) => (
+              <li><a href={item.href}>{item.label}</a></li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </noscript>
 </Base>
+
+<style>
+  .no-js-fallback {
+    list-style: none;
+    padding: var(--space-12) var(--space-8);
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .no-js-fallback h2 {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-top: var(--space-8);
+  }
+  .no-js-fallback ul ul { padding-left: var(--space-6); }
+</style>
