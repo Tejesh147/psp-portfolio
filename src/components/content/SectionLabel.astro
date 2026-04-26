@@ -1,0 +1,17 @@
+---
+interface Props {
+  number: string;
+  label: string;
+}
+const { number, label } = Astro.props;
+---
+<div class="section-label" aria-hidden="true">// {number} · {label}</div>
+<style>
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+</style>

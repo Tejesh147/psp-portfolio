@@ -1,0 +1,16 @@
+---
+interface Props { children?: any }
+---
+<span class="tag"><slot /></span>
+<style>
+  .tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid var(--surface-stroke);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.5px;
+  }
+</style>
