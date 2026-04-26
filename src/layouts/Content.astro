@@ -1,0 +1,25 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  context?: string;
+}
+const { title, description, context } = Astro.props;
+---
+
+<Base title={title} description={description} backHref="/" context={context} waveIntensity="subdued">
+  <article class="content">
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .content {
+    max-width: 720px;
+    margin: var(--space-12) auto;
+    padding: 0 var(--space-8);
+    line-height: 1.6;
+  }
+</style>
