@@ -16,6 +16,8 @@ interface Props {
   initialCategoryId?: string;
 }
 
+function blip() { window.dispatchEvent(new CustomEvent("psp:nav-blip")); }
+
 export default function XmbShell({ categories, initialCategoryId = "projects" }: Props) {
   const nav = useXmbNav(categories, { initialCategoryId });
 
@@ -24,6 +26,7 @@ export default function XmbShell({ categories, initialCategoryId = "projects" }:
       if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) {
         e.preventDefault();
         nav.handleKey(e.key);
+        blip();
       } else if (e.key === "Enter") {
         if (nav.activeHref) window.location.assign(nav.activeHref);
       }
@@ -52,7 +55,7 @@ export default function XmbShell({ categories, initialCategoryId = "projects" }:
               type="button"
               className={cls}
               aria-current={i === nav.activeCategoryIndex ? "true" : undefined}
-              onClick={() => nav.setActive(i, 0)}
+              onClick={() => { nav.setActive(i, 0); blip(); }}
             >
               <span className={styles.catIcon}>
                 {(() => {
@@ -76,7 +79,7 @@ export default function XmbShell({ categories, initialCategoryId = "projects" }:
               href={item.href}
               {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className={className}
-              onMouseEnter={() => nav.setActive(nav.activeCategoryIndex, i)}
+              onMouseEnter={() => { nav.setActive(nav.activeCategoryIndex, i); blip(); }}
               aria-current={isActive ? "true" : undefined}
             >
               <span>

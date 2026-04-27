@@ -1,0 +1,11 @@
+.toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--ink-muted);
+  display: inline-flex;
+  align-items: center;
+}
+.toggle:hover { color: var(--ink); }
+.toggle.on { color: var(--accent); }

@@ -1,4 +1,6 @@
 ---
+import SoundToggle from "./SoundToggle";
+
 interface Props {
   /** Path back to the XMB. If undefined, left side shows the brand. */
   backHref?: string;
@@ -18,6 +20,7 @@ const time = now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit
   <div class="status-right">
     {context && <span class="ctx" aria-hidden="true">{context}</span>}
     <span class="clock" aria-hidden="true">{time}</span>
+    <SoundToggle client:idle />
     <span class="battery" aria-hidden="true">
       <span class="battery-icon"><span class="battery-fill"></span></span>
       <span class="battery-pct">80%</span>
