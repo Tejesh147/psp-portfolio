@@ -1,6 +1,15 @@
 import { useEffect, useMemo } from "react";
+import { Info, Network, FileText, Joystick, Camera } from "lucide-react";
 import { useXmbNav, type XmbCategory } from "./useXmbNav";
 import styles from "./xmb.module.css";
+
+const ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
+  info: Info,
+  network: Network,
+  files: FileText,
+  projects: Joystick,
+  personal: Camera,
+};
 
 interface Props {
   categories: XmbCategory[];
@@ -45,7 +54,12 @@ export default function XmbShell({ categories, initialCategoryId = "projects" }:
               aria-current={i === nav.activeCategoryIndex ? "true" : undefined}
               onClick={() => nav.setActive(i, 0)}
             >
-              <span className={styles.catIcon}>{/* icon slot — Task 19 */}</span>
+              <span className={styles.catIcon}>
+                {(() => {
+                  const Icon = cat.iconName ? ICONS[cat.iconName] : undefined;
+                  return Icon ? <Icon size={36} strokeWidth={1.4} /> : null;
+                })()}
+              </span>
               <span className={styles.catLabel}>{cat.label}</span>
             </button>
           );
