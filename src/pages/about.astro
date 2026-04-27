@@ -5,4 +5,15 @@ import Content from "../layouts/Content.astro";
   <h1>About</h1>
   <p>[STUB] Replace with real bio.</p>
   <p><a href="/system">System Info →</a></p>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tejesh Arujuna",
+    "url": "https://YOUR-DOMAIN.com/",
+    "jobTitle": "Software Engineer",
+    "sameAs": [
+      "https://github.com/Tejesh147",
+      "https://www.linkedin.com/in/tejesh-arujuna",
+    ],
+  })} />
 </Content>

@@ -74,6 +74,14 @@ const projectId = `PRJ://${String(data.order).padStart(3, "0")}`;
       </nav>
     )}
   </article>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": data.title,
+    "author": { "@type": "Person", "name": "Tejesh Arujuna" },
+    "datePublished": String(data.year),
+    "keywords": data.tags,
+  })} />
 </Base>
 
 <style>
