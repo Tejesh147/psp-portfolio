@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { Info, Network, FileText, Joystick, Camera } from "lucide-react";
 import { useXmbNav, type XmbCategory } from "./useXmbNav";
+import { triggerMemoryStickAccess } from "../chrome/MemoryStickAccess";
 import styles from "./xmb.module.css";
 
 const ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number }>> = {
@@ -73,13 +74,20 @@ export default function XmbShell({ categories, initialCategoryId = "projects" }:
         {nav.activeCategory?.items.map((item, i) => {
           const isActive = i === nav.activeItemIndex;
           const className = [styles.subitem, isActive ? styles.active : ""].join(" ");
+          const onClick = (e: React.MouseEvent) => {
+            if (item.id === "resume") {
+              e.preventDefault();
+              triggerMemoryStickAccess(item.href);
+            }
+          };
           return (
             <a
               key={item.id}
               href={item.href}
+              onClick={onClick}
+              onMouseEnter={() => { nav.setActive(nav.activeCategoryIndex, i); blip(); }}
               {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className={className}
-              onMouseEnter={() => { nav.setActive(nav.activeCategoryIndex, i); blip(); }}
               aria-current={isActive ? "true" : undefined}
             >
               <span>

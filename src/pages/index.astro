@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import XmbShell from "../components/xmb/XmbShell";
 import BootIntro from "../components/chrome/BootIntro";
 import KonamiListener from "../components/chrome/KonamiListener";
+import MemoryStickAccess from "../components/chrome/MemoryStickAccess";
 import { buildXmbCategories } from "../lib/xmbData";
 
 const categories = await buildXmbCategories();
@@ -11,6 +12,7 @@ const categories = await buildXmbCategories();
 <Base title="Tejesh Arujuna — PSP Portfolio" waveIntensity="lush">
   <BootIntro client:load />
   <KonamiListener client:idle />
+  <MemoryStickAccess client:idle />
   <XmbShell client:load categories={categories} initialCategoryId="projects" />
 
   <noscript>
